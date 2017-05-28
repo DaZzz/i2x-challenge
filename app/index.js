@@ -1,7 +1,9 @@
 import React, { Components } from 'react'
 import ReactDOM from 'react-dom'
+import styled from 'styled-components'
+import App from './components/App'
 
 ReactDOM.render(
-  <div> Hey, there </div>,
+  <App />,
   document.getElementById('app')
 )
