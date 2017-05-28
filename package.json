@@ -1,0 +1,25 @@
+{
+  "name": "i2x-challenge",
+  "version": "1.0.0",
+  "description": "Simple React app with two views",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack-dashboard -m -- webpack-dev-server --hot"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "babel-preset-env": "^1.5.1",
+    "babel-preset-react": "^6.24.1",
+    "webpack": "^2.6.1",
+    "webpack-dashboard": "^0.4.0",
+    "webpack-dev-server": "^2.4.5"
+  },
+  "dependencies": {
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-router": "^4.1.1",
+    "styled-components": "^2.0.0"
+  }
+}
