@@ -24,6 +24,10 @@ module.exports = env => ({
       {
         test: /\.css/,
         loader: ExtractTextPlugin.extract('css-loader')
+      },
+      {
+        test: /\.svg/,
+        loader: 'file-loader'
       }
     ]
   },
