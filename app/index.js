@@ -1,6 +1,6 @@
-import React, { Components } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
-import styled from 'styled-components'
+import 'sanitize.css/sanitize.css'
 import App from './components/App'
 
 ReactDOM.render(

@@ -1,5 +1,6 @@
 const path = require('path')
 const DashboardPlugin = require('webpack-dashboard/plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = env => ({
   entry: [
@@ -20,6 +21,10 @@ module.exports = env => ({
           loader: 'babel-loader'
         }
       },
+      {
+        test: /\.css/,
+        loader: ExtractTextPlugin.extract('css-loader')
+      }
     ]
   },
   devServer: {
@@ -29,6 +34,7 @@ module.exports = env => ({
     port: 8080
   },
   plugins: [
+    new ExtractTextPlugin({ filename: 'bundle.css', disable: false, allChunks: true }),
     new DashboardPlugin()
   ]
 })
