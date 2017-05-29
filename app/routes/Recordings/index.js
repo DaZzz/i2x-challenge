@@ -1,2 +1,2 @@
-import Recordings from './components/Recordings'
-export default Recordings
+import RecordingsContainer from './containers/RecordingsContainer'
+export default RecordingsContainer

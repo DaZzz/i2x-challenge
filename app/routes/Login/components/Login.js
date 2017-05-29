@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import styled, { keyframes } from 'styled-components'
 import logoUrl from '../images/logo-big.png'
 import wavesUrl from '../images/waves.svg'
@@ -110,15 +110,16 @@ class Login extends Component {
 
   state = {
     email: '',
-    password: ''
+    password: '',
+    redirect: false
   }
 
   componentWillReceiveProps (nextProps) {
     if (this.props.isFetching && !nextProps.isFetching) {
       if (nextProps.isAuthenticated) {
-        nextProps.history.push('/recordings')
+        this.setState({redirect: true})
       } else {
-
+        // Show error
       }
     }
   }
@@ -138,6 +139,8 @@ class Login extends Component {
   }
 
   render () {
+    if (this.state.redirect) return <Redirect to="/recordings" />
+
     return (
       <Background>
         <Logo />
@@ -161,4 +164,4 @@ class Login extends Component {
   }
 }
 
-export default withRouter(Login)
+export default Login

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import logoUrl from '../images/logo-small.png'
 import playUrl from '../images/play.svg'
@@ -37,8 +37,8 @@ const SignoutButton = styled.button`
   background-color: rgba(255, 255, 255, 0.15);
   border-radius: 4px;
   color: rgba(255, 255, 255, 0.8);
-  font-size: 18px;
-  padding: 10px 32px;
+  font-size: 16px;
+  padding: 10px 28px;
   border: none;
 
   &:active {
@@ -139,13 +139,18 @@ const PlayButton = styled.button`
 `
 
 
-class Login extends Component {
+class Recordings extends Component {
+  handleSignout = () => {
+    this.props.logout()
+    this.props.history.push('/login')
+  }
+
   render () {
     return (
       <Background>
         <Header>
           <Logo />
-          <SignoutButton> Sign out </SignoutButton>
+          <SignoutButton onClick={this.handleSignout}> Sign out </SignoutButton>
         </Header>
 
 
@@ -190,4 +195,4 @@ class Login extends Component {
   }
 }
 
-export default Login
+export default withRouter(Recordings)
