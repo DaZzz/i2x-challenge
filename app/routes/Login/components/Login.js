@@ -1,17 +1,16 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import styled, { keyframes } from 'styled-components'
-import logoUrl from '../images/logo-big.svg'
+import logoUrl from '../images/logo-big.png'
 import wavesUrl from '../images/waves.svg'
-
 
 const wavesKeyframes = keyframes`
   0% {
-    background-position: 0px 270px;
+    background-position: 0px 275px;
   }
 
   100% {
-    background-position: 1050px 270px;
+    background-position: 1050px 275px;
   }
 `
 
@@ -20,29 +19,30 @@ const Background = styled.div`
   background-image: url(${wavesUrl});
   background-repeat: repeat-x;
   background-size: 1050px 250px;
-  background-position: 0px 270px;
+  background-position: 0px 275px;
   height: 100vh;
   width: 100vw;
   flex-flow: row nowrap;
-  padding-top: 24px;
+  padding-top: 40px;
   animation: ${wavesKeyframes} 60s infinite linear;
 `
 
 const Logo = styled.div`
-  width: 319px;
-  height: 118px;
+  width: 118px;
+  height: 110px;
   background-image: url(${logoUrl});
   background-repeat: no-repeat;
   background-size: contain;
   margin: 0 auto;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 `
 
 const Subtitle = styled.div`
   font-size: 18px;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.5);
   text-align: center;
   margin-bottom: 96px;
+  font-style: italic;
 `
 
 const LoginCard = styled.div`
@@ -107,6 +107,36 @@ const Button = styled.button`
 `
 
 class Login extends Component {
+
+  state = {
+    email: '',
+    password: ''
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (this.props.isFetching && !nextProps.isFetching) {
+      if (nextProps.isAuthenticated) {
+        nextProps.history.push('/recordings')
+      } else {
+
+      }
+    }
+  }
+
+  handleLogin = () => {
+    const { email, password } = this.state
+
+    this.props.login({
+      email,
+      password
+    })
+  }
+
+  handleInputChange = (event) => {
+    const target = event.target
+    this.setState({[target.name]: target.value})
+  }
+
   render () {
     return (
       <Background>
@@ -116,19 +146,19 @@ class Login extends Component {
         <LoginCard>
           <InputGroup>
             <InputLabel> Email </InputLabel>
-            <Input type="text" />
+            <Input type="email" name="email" onChange={this.handleInputChange} />
           </InputGroup>
 
           <InputGroup>
             <InputLabel> Password </InputLabel>
-            <Input type="password" />
+            <Input type="password" name="password" onChange={this.handleInputChange} />
           </InputGroup>
 
-          <Button> Login </Button>
+          <Button onClick={this.handleLogin}> Login </Button>
         </LoginCard>
       </Background>
     )
   }
 }
 
-export default Login
+export default withRouter(Login)

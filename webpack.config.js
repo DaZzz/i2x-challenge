@@ -8,6 +8,14 @@ module.exports = env => ({
     'webpack/hot/only-dev-server',
     './app/index.js'
   ],
+  resolve: {
+    alias: {
+      modules: path.resolve(__dirname, 'app', 'modules'),
+      components: path.resolve(__dirname, 'app', 'components'),
+      routes: path.resolve(__dirname, 'app', 'routes'),
+      store: path.resolve(__dirname, 'app', 'store')
+    },
+  },
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js'
@@ -26,7 +34,7 @@ module.exports = env => ({
         loader: ExtractTextPlugin.extract('css-loader')
       },
       {
-        test: /\.svg/,
+        test: /\.(svg|png)/,
         loader: 'file-loader'
       }
     ]

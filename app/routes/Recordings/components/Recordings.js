@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import logoUrl from '../images/logo-small.svg'
+import logoUrl from '../images/logo-small.png'
 import playUrl from '../images/play.svg'
 import pauseUrl from '../images/pause.svg'
 import Rating from './Rating'
@@ -25,8 +25,8 @@ const Header = styled.div`
 `
 
 const Logo = styled.div`
-  width: 116px;
-  height: 40px;
+  width: 172px;
+  height: 44px;
   background-image: url(${logoUrl});
   background-repeat: no-repeat;
   background-size: contain;
