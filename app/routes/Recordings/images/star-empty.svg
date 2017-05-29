@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="15px" viewBox="0 0 16 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 43.2 (39069) - http://www.bohemiancoding.com/sketch -->
+    <title>star-empty</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Main" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Login" transform="translate(-434.000000, -225.000000)" fill="#CDCDCD">
+            <g id="Recordings" transform="translate(152.000000, 174.000000)">
+                <g id="Recording-Card">
+                    <g id="Stars" transform="translate(222.000000, 51.000000)">
+                        <polygon id="Star" points="68 12 63.297718 14.472136 64.1957739 9.23606798 60.3915479 5.52786405 65.648859 4.76393202 68 0 70.351141 4.76393202 75.6084521 5.52786405 71.8042261 9.23606798 72.702282 14.472136"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

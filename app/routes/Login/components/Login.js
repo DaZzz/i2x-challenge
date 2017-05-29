@@ -7,11 +7,11 @@ import wavesUrl from '../images/waves.svg'
 
 const wavesKeyframes = keyframes`
   0% {
-    background-position: 0px center;
+    background-position: 0px 270px;
   }
 
   100% {
-    background-position: 1050px center;
+    background-position: 1050px 270px;
   }
 `
 
@@ -20,7 +20,7 @@ const Background = styled.div`
   background-image: url(${wavesUrl});
   background-repeat: repeat-x;
   background-size: 1050px 250px;
-  background-position: 0px center;
+  background-position: 0px 270px;
   height: 100vh;
   width: 100vw;
   flex-flow: row nowrap;
@@ -52,6 +52,7 @@ const LoginCard = styled.div`
   background-color: #fff;
   margin: 0 auto 24px;
   padding: 24px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 `
 
 const InputGroup = styled.div`
@@ -101,7 +102,7 @@ const Button = styled.button`
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 3px #ff7f00;
+    box-shadow: 0 0 5px 1px #ff7f00;
   }
 `
 
