@@ -4,6 +4,7 @@ import { Link, Redirect } from 'react-router-dom'
 import styled, { keyframes } from 'styled-components'
 import logoUrl from '../images/logo-big.png'
 import wavesUrl from '../images/waves.svg'
+import SubmitButton from './SubmitButton'
 
 const wavesKeyframes = keyframes`
   0% {
@@ -117,31 +118,6 @@ const Input = styled.input`
   }
 `
 
-const Submit = styled.input`
-  display: block;
-  width: 100%;
-  background-color: #ff7f00;
-  border-radius: 4px;
-  color: #fff;
-  font-size: 16px;
-  padding: 11px;
-  border: none;
-  margin-top: 24px;
-
-  &:hover {
-    background-color: #f77a00;
-  }
-
-  &:active {
-    background-color: #db6d00;
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 5px 1px #ff7f00;
-  }
-`
-
 class Login extends Component {
 
   state = {
@@ -173,6 +149,7 @@ class Login extends Component {
   }
 
   handleLogin = event => {
+    if (this.props.isFetching) return
     const { email, password } = this.state
 
     this.props.login({ email, password })
@@ -206,7 +183,7 @@ class Login extends Component {
             <Input type="password" name="password" onChange={this.handleInputChange} />
           </InputGroup>
 
-          <Submit type="submit" value="Login" />
+          <SubmitButton loading={this.props.isFetching} text="Login" />
         </LoginCard>
       </Background>
     )
