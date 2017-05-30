@@ -5,7 +5,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dashboard -m -- webpack-dev-server"
+    "start": "webpack-dashboard -m -- webpack-dev-server --config webpack.config.dev.js",
+    "build": "rm -rf ./build && webpack --config webpack.config.prod.js && cp ./app/static/index.html ./build/index.html",
+    "deploy:gh-pages": "git subtree push --prefix build origin gh-pages"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
