@@ -1,5 +1,4 @@
 import { handleActions, createAction } from 'redux-actions'
-import { browserHistory } from 'react-router'
 import axios from 'axios'
 
 // Constants
@@ -27,7 +26,7 @@ export const login = (credentials) => (dispatch, getState) => {
     localStorage.setItem('token', response.data.token)
     dispatch(loginSuccess())
   })
-  .catch(error => {
+  .catch(() => {
     dispatch(loginFailure())
   })
 }

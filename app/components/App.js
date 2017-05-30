@@ -14,9 +14,9 @@ const App = props =>
     <AppWrapper>
       <Route exact path="/" render={() => (
         <Redirect to="/recordings" />
-      )}/>
+      )} />
       <Route path="/login" component={Login} />
-      <PrivateRoute path="/recordings" component={Recordings} isAuthenticated={props.isAuthenticated}/>
+      <PrivateRoute path="/recordings" component={Recordings} isAuthenticated={props.isAuthenticated} />
     </AppWrapper>
   </Router>
 

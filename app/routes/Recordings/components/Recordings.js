@@ -86,7 +86,6 @@ const ItemsCount = styled.div`
   }
 `
 
-
 class Recordings extends Component {
   static propTypes = {
     recordings: PropTypes.array,
@@ -113,7 +112,7 @@ class Recordings extends Component {
   }
 
   render () {
-    if (this.state.logout) <Redirect to="/login" />
+    if (this.state.logout) return <Redirect to="/login" />
     const { recordings, isFetching } = this.props
 
     return (
@@ -133,16 +132,16 @@ class Recordings extends Component {
             </ItemsCount>
           </Title>
 
-          {recordings.map(({created, rating, final_script, duration, url, id}) => (
+          {recordings.map(recording => (
             <Card
-              key={id}
-              created={created}
-              rating={rating}
-              transcript={final_script}
-              duration={duration}
-              audioSource={url}
-              isPlaying={this.state.currentRecordingId === id}
-              onPlay={() => this.handlePlay(id)}
+              key={recording.id}
+              created={recording.created}
+              rating={recording.rating}
+              transcript={recording.final_script}
+              duration={recording.duration}
+              audioSource={recording.url}
+              isPlaying={this.state.currentRecordingId === recording.id}
+              onPlay={() => this.handlePlay(recording.id)}
             />
           ))}
         </Content>

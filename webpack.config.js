@@ -9,7 +9,7 @@ module.exports = {
       components: path.resolve(__dirname, 'app', 'components'),
       routes: path.resolve(__dirname, 'app', 'routes'),
       store: path.resolve(__dirname, 'app', 'store')
-    },
+    }
   },
   output: {
     path: path.resolve(__dirname, 'build'),

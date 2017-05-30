@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { findDOMNode } from 'react-dom'
-import { Link, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import styled, { keyframes } from 'styled-components'
 import logoUrl from '../images/logo-big.png'
 import wavesUrl from '../images/waves.svg'

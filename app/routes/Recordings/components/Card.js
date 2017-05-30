@@ -73,7 +73,7 @@ const PlayButton = styled.button`
   border-radius: 24px;
   background-color: #ff7f00;
   border: none;
-  background-image: url(${props => props.playing ? pauseUrl : playUrl });
+  background-image: url(${props => props.playing ? pauseUrl : playUrl});
   background-repeat: no-repeat;
   background-size: 32px 32px;
   background-position: center;
@@ -98,14 +98,14 @@ class Card extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-      if (!this.audioRef) return
+    if (!this.audioRef) return
 
-      if (!this.props.isPlaying && nextProps.isPlaying) {
-        this.audioRef.play()
-      } else {
-        this.audioRef.currentTime = 0
-        this.audioRef.pause()
-      }
+    if (!this.props.isPlaying && nextProps.isPlaying) {
+      this.audioRef.play()
+    } else {
+      this.audioRef.currentTime = 0
+      this.audioRef.pause()
+    }
   }
 
   get formattedDate () {
