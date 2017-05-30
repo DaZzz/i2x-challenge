@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { findDOMNode } from 'react-dom'
 import { Link, Redirect } from 'react-router-dom'
 import styled, { keyframes } from 'styled-components'
 import logoUrl from '../images/logo-big.png'
@@ -45,6 +46,32 @@ const Subtitle = styled.div`
   font-style: italic;
 `
 
+const shakeKeyframes = keyframes`
+  0% {
+    transform: translateX(0);
+  }
+
+  20% {
+    transform: translateX(-15px);
+  }
+
+  40% {
+    transform: translateX(12px);
+  }
+
+  55% {
+    transform: translateX(-8px);
+  }
+
+  70% {
+    transform: translateX(5px);
+  }
+
+  77% {
+    transform: translateX(0);
+  }
+`
+
 const LoginCard = styled.form`
   width: 360px;
   border-radius: 12px;
@@ -53,6 +80,11 @@ const LoginCard = styled.form`
   margin: 0 auto 24px;
   padding: 24px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+
+  ${props => props.error
+    ? `animation: ${shakeKeyframes} 0.4s ease;`
+    : `animation: none;`
+  }
 `
 
 const InputGroup = styled.div`
@@ -115,7 +147,8 @@ class Login extends Component {
   state = {
     email: '',
     password: '',
-    redirect: false
+    redirect: false,
+    error: false
   }
 
   componentWillReceiveProps (nextProps) {
@@ -123,7 +156,18 @@ class Login extends Component {
       if (nextProps.isAuthenticated) {
         this.setState({redirect: true})
       } else {
-        // Show error
+        this.setState({error: true})
+        if (this.loginCardRef) {
+          const cardNode = findDOMNode(this.loginCardRef)
+
+          cardNode.style.webkitAnimation = 'none'
+          cardNode.style.animation = 'none'
+
+          setTimeout(() => {
+            cardNode.style.webkitAnimation = ''
+            cardNode.style.animation = ''
+          }, 10)
+        }
       }
     }
   }
@@ -148,7 +192,10 @@ class Login extends Component {
         <Logo />
         <Subtitle> Find best recordings but first login to your account </Subtitle>
 
-        <LoginCard onSubmit={this.handleLogin}>
+        <LoginCard
+          ref={ref => { this.loginCardRef = ref }}
+          error={this.state.error}
+          onSubmit={this.handleLogin}>
           <InputGroup>
             <InputLabel> Email </InputLabel>
             <Input type="email" name="email" onChange={this.handleInputChange} />

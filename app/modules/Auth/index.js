@@ -29,7 +29,6 @@ export const login = (credentials) => (dispatch, getState) => {
   })
   .catch(error => {
     dispatch(loginFailure())
-    console.error(error)
   })
 }
 
