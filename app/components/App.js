@@ -20,4 +20,8 @@ const App = props =>
     </AppWrapper>
   </Router>
 
+// ---
+// Should be connected here to make PrivateRoute work correctly take a look at:
+// https://stackoverflow.com/questions/43892050/react-router-4-x-privateroute-not-working-after-connecting-to-redux
+// ---
 export default connect(state => ({ isAuthenticated: state.auth.isAuthenticated }))(App)
