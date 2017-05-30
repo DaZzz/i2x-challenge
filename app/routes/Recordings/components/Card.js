@@ -72,7 +72,7 @@ const PlayButton = styled.button`
   border-radius: 24px;
   background-color: #ff7f00;
   border: none;
-  background-image: url(${playUrl});
+  background-image: url(${props => props.playing ? pauseUrl : playUrl });
   background-repeat: no-repeat;
   background-size: 32px 32px;
   background-position: center;
@@ -87,48 +87,74 @@ const PlayButton = styled.button`
   }
 `
 
-const formatDate = dateString => {
-  const date = new Date(dateString)
-  return `${format(date, 'Do')} of ${format(date, 'MMMM YYYY')}`
-}
-
-const formatTime = time => {
-  const minutes = Math.floor(time / 60)
-  const seconds = time - minutes * 60
-  let result = `${seconds}s`
-
-  if (minutes > 0) {
-    result = `${minutes}m ${result}`
+class Card extends Component {
+  state = {
+    isPlaying: false
   }
 
-  return result
+  handlePlay = () => {
+    if (!this.audioRef) return
+
+    if (!this.state.isPlaying) {
+      this.audioRef.play()
+      this.setState({ isPlaying: true })
+    } else {
+      this.audioRef.currentTime = 0
+      this.audioRef.pause()
+      this.setState({ isPlaying: false })
+    }
+  }
+
+  get formattedDate () {
+    const date = new Date(this.props.created)
+    return `${format(date, 'Do')} of ${format(date, 'MMMM YYYY')}`
+  }
+
+  get formattedDuration () {
+    const { duration } = this.props
+    const minutes = Math.floor(duration / 60)
+    const seconds = duration - minutes * 60
+    let result = `${seconds}s`
+
+    if (minutes > 0) {
+      result = `${minutes}m ${result}`
+    }
+
+    return result
+  }
+
+  render () {
+    const { transcript, rating, audioSource } = this.props
+
+    return (
+      <Wrapper>
+        <Header>
+          <InfoBlock>
+            <InfoLabel> Created on </InfoLabel>
+            <InfoText> {this.formattedDate} </InfoText>
+          </InfoBlock>
+
+          <InfoBlock>
+            <InfoLabel> Rating </InfoLabel>
+            <Rating rating={rating} />
+          </InfoBlock>
+
+          <InfoBlock>
+            <InfoLabel> Duration </InfoLabel>
+            <InfoText> {this.formattedDuration} </InfoText>
+          </InfoBlock>
+
+          <PlayButton playing={this.state.isPlaying} onClick={this.handlePlay} />
+          <audio ref={ref => { this.audioRef = ref }} src={audioSource} />
+        </Header>
+
+        <InfoBlock>
+          <InfoLabel> Transcript </InfoLabel>
+          <InfoText> {transcript} </InfoText>
+        </InfoBlock>
+      </Wrapper>
+    )
+  }
 }
-
-const Card = (props) =>
-  <Wrapper>
-    <Header>
-      <InfoBlock>
-        <InfoLabel> Created on </InfoLabel>
-        <InfoText> {formatDate(props.created)} </InfoText>
-      </InfoBlock>
-
-      <InfoBlock>
-        <InfoLabel> Rating </InfoLabel>
-        <Rating rating={props.rating} />
-      </InfoBlock>
-
-      <InfoBlock>
-        <InfoLabel> Duration </InfoLabel>
-        <InfoText> {formatTime(props.duration)} </InfoText>
-      </InfoBlock>
-
-      <PlayButton />
-    </Header>
-
-    <InfoBlock>
-      <InfoLabel> Transcript </InfoLabel>
-      <InfoText> {props.transcript} </InfoText>
-    </InfoBlock>
-  </Wrapper>
 
 export default Card

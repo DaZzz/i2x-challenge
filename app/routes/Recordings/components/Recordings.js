@@ -128,7 +128,7 @@ class Recordings extends Component {
               rating={rating}
               transcript={final_script}
               duration={duration}
-              url={url}
+              audioSource={url}
             />
           ))}
         </Content>
