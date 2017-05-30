@@ -1,3 +1,5 @@
+![Screen](https://raw.githubusercontent.com/DaZzz/i2x-challenge/master/screen.png)
+
 # SoundBuddy
 
 This is React showcase app for demonstration purposes. In this app you will be able to
