@@ -3,6 +3,7 @@ import styled, { keyframes, css } from 'styled-components'
 import playUrl from '../images/play.svg'
 import pauseUrl from '../images/pause.svg'
 import Rating from './Rating'
+import format from 'date-fns/format'
 
 const wrapperKeyframes = keyframes`
   0% {
@@ -86,12 +87,29 @@ const PlayButton = styled.button`
   }
 `
 
+const formatDate = dateString => {
+  const date = new Date(dateString)
+  return `${format(date, 'Do')} of ${format(date, 'MMMM YYYY')}`
+}
+
+const formatTime = time => {
+  const minutes = Math.floor(time / 60)
+  const seconds = time - minutes * 60
+  let result = `${seconds}s`
+
+  if (minutes > 0) {
+    result = `${minutes}m ${result}`
+  }
+
+  return result
+}
+
 const Card = (props) =>
   <Wrapper>
     <Header>
       <InfoBlock>
         <InfoLabel> Created on </InfoLabel>
-        <InfoText> {props.created} </InfoText>
+        <InfoText> {formatDate(props.created)} </InfoText>
       </InfoBlock>
 
       <InfoBlock>
@@ -101,7 +119,7 @@ const Card = (props) =>
 
       <InfoBlock>
         <InfoLabel> Duration </InfoLabel>
-        <InfoText> {props.duration} </InfoText>
+        <InfoText> {formatTime(props.duration)} </InfoText>
       </InfoBlock>
 
       <PlayButton />
