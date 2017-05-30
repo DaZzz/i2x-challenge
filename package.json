@@ -5,7 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dashboard -m -- webpack-dev-server --hot"
+    "start": "webpack-dashboard -m -- webpack-dev-server"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
