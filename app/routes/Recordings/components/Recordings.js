@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import styled from 'styled-components'
 import logoUrl from '../images/logo-small.png'
-import playUrl from '../images/play.svg'
-import pauseUrl from '../images/pause.svg'
-import Rating from './Rating'
+import Card from './Card'
 
 const Background = styled.div`
   background-color: #303577;
@@ -54,7 +52,8 @@ const SignoutButton = styled.button`
 const Content = styled.div`
   width: 720px;
   margin: 0 auto;
-  padding-top: 32px;
+  padding: 32px 0;
+
 `
 
 const Title = styled.div`
@@ -82,70 +81,29 @@ const ItemsCount = styled.div`
   }
 `
 
-const Card = styled.div`
-  padding: 24px;
-  border-radius: 12px;
-  background-color: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-`
-
-const CardHeader = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: flex-start;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #eee;
-  margin-bottom: 20px;
-`
-
-const InfoBlock = styled.div`
-  flex: 1;
-  display: block;
-`
-
-const InfoLabel = styled.div`
-  font-size: 12px;
-  text-transform: uppercase;
-  color: #888;
-  letter-spacing: 0.5;
-  margin-bottom: 8px;
-`
-
-const InfoText = styled.div`
-  font-size: 16px;
-  color: #222;
-  line-height: 1.6;
-`
-
-const PlayButton = styled.button`
-  width: 48px;
-  height: 48px;
-  border-radius: 24px;
-  background-color: #ff7f00;
-  border: none;
-  background-image: url(${playUrl});
-  background-repeat: no-repeat;
-  background-size: 32px 32px;
-  background-position: center;
-
-  &:active {
-    background-color: #db6d00;
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 5px 1px #ff7f00;
-  }
-`
-
 
 class Recordings extends Component {
+  state = {
+    logout: false
+  }
+
+  componentDidMount () {
+    this.props.fetchRecordings()
+  }
+
+  componentWillReceiveProps (nextProps) {
+    console.log(nextProps)
+  }
+
   handleSignout = () => {
     this.props.logout()
-    this.props.history.push('/login')
+    this.setState({logout: true})
   }
 
   render () {
+    if (this.state.logout) <Redirect to="/login" />
+    const { recordings, isFetching } = this.props
+
     return (
       <Background>
         <Header>
@@ -153,46 +111,30 @@ class Recordings extends Component {
           <SignoutButton onClick={this.handleSignout}> Sign out </SignoutButton>
         </Header>
 
-
         <Content>
           <Title>
-            Recordings <ItemsCount> 6 items </ItemsCount>
+            Recordings <ItemsCount>
+              { isFetching
+                ? ` Loading...`
+                : ` ${recordings.length} items`
+              }
+            </ItemsCount>
           </Title>
 
-          <Card>
-            <CardHeader>
-              <InfoBlock>
-                <InfoLabel> Created on </InfoLabel>
-                <InfoText> 12 March 2015 </InfoText>
-              </InfoBlock>
-
-              <InfoBlock>
-                <InfoLabel> Rating </InfoLabel>
-                <Rating rating={3} />
-              </InfoBlock>
-
-              <InfoBlock>
-                <InfoLabel> Duration </InfoLabel>
-                <InfoText> 15 minutes </InfoText>
-              </InfoBlock>
-
-              <PlayButton />
-            </CardHeader>
-
-            <InfoBlock>
-              <InfoLabel> Transcript </InfoLabel>
-              <InfoText>
-                They failed to recognize the difficulty of some of the remaining tasks.
-                Progress slowed and in 1974, in response to the criticism of Sir James
-                Lighthill[26] and ongoing pressure from the US Congress to fund more productive projects,
-                both the U.S. and British governments cut off exploratory research in AI.
-              </InfoText>
-            </InfoBlock>
-          </Card>
+          {recordings.map(({created, rating, final_script, duration, url}, index) => (
+            <Card
+              key={index}
+              created={created}
+              rating={rating}
+              transcript={final_script}
+              duration={duration}
+              url={url}
+            />
+          ))}
         </Content>
       </Background>
     )
   }
 }
 
-export default withRouter(Recordings)
+export default Recordings
