@@ -39,8 +39,12 @@ const SignoutButton = styled.button`
   padding: 10px 28px;
   border: none;
 
-  &:active {
+  &:hover {
     background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  &:active {
+    background-color: rgba(255, 255, 255, 0.25);
   }
 
   &:focus {

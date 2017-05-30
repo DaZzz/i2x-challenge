@@ -96,6 +96,10 @@ const Button = styled.button`
   border: none;
   margin-top: 24px;
 
+  &:hover {
+    background-color: #f77a00;
+  }
+
   &:active {
     background-color: #db6d00;
   }
