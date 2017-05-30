@@ -25,7 +25,8 @@ export const fetchRecordings = () => (dispatch, getState) => {
     }
   })
   .then(response => {
-    dispatch(fetchRecordingsSuccess(response.data.results))
+    const recordings = response.data.results.map((recording, id) => ({ ...recording, id }))
+    dispatch(fetchRecordingsSuccess(recordings))
   })
   .catch(error => {
     dispatch(fetchRecordingsFailure())

@@ -88,7 +88,8 @@ const ItemsCount = styled.div`
 
 class Recordings extends Component {
   state = {
-    logout: false
+    logout: false,
+    currentRecordingId: null
   }
 
   componentDidMount () {
@@ -98,6 +99,12 @@ class Recordings extends Component {
   handleSignout = () => {
     this.props.logout()
     this.setState({logout: true})
+  }
+
+  handlePlay = id => {
+    this.setState(state => ({
+      currentRecordingId: id === state.currentRecordingId ? null : id
+    }))
   }
 
   render () {
@@ -121,14 +128,16 @@ class Recordings extends Component {
             </ItemsCount>
           </Title>
 
-          {recordings.map(({created, rating, final_script, duration, url}, index) => (
+          {recordings.map(({created, rating, final_script, duration, url, id}) => (
             <Card
-              key={index}
+              key={id}
               created={created}
               rating={rating}
               transcript={final_script}
               duration={duration}
               audioSource={url}
+              isPlaying={this.state.currentRecordingId === id}
+              onPlay={() => this.handlePlay(id)}
             />
           ))}
         </Content>

@@ -88,21 +88,16 @@ const PlayButton = styled.button`
 `
 
 class Card extends Component {
-  state = {
-    isPlaying: false
-  }
 
-  handlePlay = () => {
-    if (!this.audioRef) return
+  componentWillReceiveProps (nextProps) {
+      if (!this.audioRef) return
 
-    if (!this.state.isPlaying) {
-      this.audioRef.play()
-      this.setState({ isPlaying: true })
-    } else {
-      this.audioRef.currentTime = 0
-      this.audioRef.pause()
-      this.setState({ isPlaying: false })
-    }
+      if (!this.props.isPlaying && nextProps.isPlaying) {
+        this.audioRef.play()
+      } else {
+        this.audioRef.currentTime = 0
+        this.audioRef.pause()
+      }
   }
 
   get formattedDate () {
@@ -124,7 +119,7 @@ class Card extends Component {
   }
 
   render () {
-    const { transcript, rating, audioSource } = this.props
+    const { transcript, rating, audioSource, onPlay, isPlaying } = this.props
 
     return (
       <Wrapper>
@@ -144,7 +139,7 @@ class Card extends Component {
             <InfoText> {this.formattedDuration} </InfoText>
           </InfoBlock>
 
-          <PlayButton playing={this.state.isPlaying} onClick={this.handlePlay} />
+          <PlayButton playing={isPlaying} onClick={onPlay} />
           <audio ref={ref => { this.audioRef = ref }} src={audioSource} />
         </Header>
 
