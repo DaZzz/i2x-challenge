@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled, { keyframes } from 'styled-components'
 import spinnerUrl from '../images/spinner.png'
 
@@ -90,5 +91,10 @@ const SubmitButton = props =>
     />
     <Spinner />
   </Wrapper>
+
+SubmitButton.propTypes = {
+  text: PropTypes.string,
+  loading: PropTypes.bool
+}
 
 export default SubmitButton

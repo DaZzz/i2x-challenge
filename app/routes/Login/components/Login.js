@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { findDOMNode } from 'react-dom'
 import { Link, Redirect } from 'react-router-dom'
 import styled, { keyframes } from 'styled-components'
@@ -119,6 +120,10 @@ const Input = styled.input`
 `
 
 class Login extends Component {
+  static propTypes = {
+    isFetching: PropTypes.bool,
+    isAuthenticated: PropTypes.bool
+  }
 
   state = {
     email: '',

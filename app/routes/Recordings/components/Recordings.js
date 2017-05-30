@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Redirect } from 'react-router-dom'
 import styled from 'styled-components'
 import logoUrl from '../images/logo-small.png'
@@ -87,6 +88,10 @@ const ItemsCount = styled.div`
 
 
 class Recordings extends Component {
+  static propTypes = {
+    recordings: PropTypes.array,
+    isFetching: PropTypes.bool
+  }
   state = {
     logout: false,
     currentRecordingId: null

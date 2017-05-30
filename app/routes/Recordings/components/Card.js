@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import styled, { keyframes, css } from 'styled-components'
 import playUrl from '../images/play.svg'
 import pauseUrl from '../images/pause.svg'
@@ -88,6 +89,13 @@ const PlayButton = styled.button`
 `
 
 class Card extends Component {
+  static propTypes = {
+    transcript: PropTypes.string,
+    rating: PropTypes.number,
+    audioSource: PropTypes.string,
+    isPlaying: PropTypes.bool,
+    onPlay: PropTypes.func
+  }
 
   componentWillReceiveProps (nextProps) {
       if (!this.audioRef) return
