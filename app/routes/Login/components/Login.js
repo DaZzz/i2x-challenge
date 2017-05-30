@@ -45,7 +45,7 @@ const Subtitle = styled.div`
   font-style: italic;
 `
 
-const LoginCard = styled.div`
+const LoginCard = styled.form`
   width: 360px;
   border-radius: 12px;
   border-top: 12px solid #ff7f00;
@@ -85,7 +85,7 @@ const Input = styled.input`
   }
 `
 
-const Button = styled.button`
+const Submit = styled.input`
   display: block;
   width: 100%;
   background-color: #ff7f00;
@@ -128,16 +128,14 @@ class Login extends Component {
     }
   }
 
-  handleLogin = () => {
+  handleLogin = event => {
     const { email, password } = this.state
 
-    this.props.login({
-      email,
-      password
-    })
+    this.props.login({ email, password })
+    event.preventDefault()
   }
 
-  handleInputChange = (event) => {
+  handleInputChange = event => {
     const target = event.target
     this.setState({[target.name]: target.value})
   }
@@ -150,7 +148,7 @@ class Login extends Component {
         <Logo />
         <Subtitle> Find best recordings but first login to your account </Subtitle>
 
-        <LoginCard>
+        <LoginCard onSubmit={this.handleLogin}>
           <InputGroup>
             <InputLabel> Email </InputLabel>
             <Input type="email" name="email" onChange={this.handleInputChange} />
@@ -161,7 +159,7 @@ class Login extends Component {
             <Input type="password" name="password" onChange={this.handleInputChange} />
           </InputGroup>
 
-          <Button onClick={this.handleLogin}> Login </Button>
+          <Submit type="submit" value="Login" />
         </LoginCard>
       </Background>
     )

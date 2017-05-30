@@ -95,10 +95,6 @@ class Recordings extends Component {
     this.props.fetchRecordings()
   }
 
-  componentWillReceiveProps (nextProps) {
-    console.log(nextProps)
-  }
-
   handleSignout = () => {
     this.props.logout()
     this.setState({logout: true})

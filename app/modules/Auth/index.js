@@ -24,13 +24,11 @@ export const login = (credentials) => (dispatch, getState) => {
     password: credentials.password
   })
   .then(response => {
-    console.log('Login success!')
     localStorage.setItem('token', response.data.token)
     dispatch(loginSuccess())
   })
   .catch(error => {
     dispatch(loginFailure())
-    console.warn('Login error! Wrong credentials.')
     console.error(error)
   })
 }

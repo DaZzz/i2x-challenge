@@ -25,7 +25,6 @@ export const fetchRecordings = () => (dispatch, getState) => {
     }
   })
   .then(response => {
-    console.log(response)
     dispatch(fetchRecordingsSuccess(response.data.results))
   })
   .catch(error => {
